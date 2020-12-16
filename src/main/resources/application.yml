@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///schedule?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC
+    username: root
+    password: 123456
+
+
+---
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+
+
+---
+#quartz
+spring:
+  quartz:
+    job-store-type: jdbc
+    properties:
+      org:
+        quartz:
+          scheduler:
+            instanceName: clusteredScheduler
+            instanceId: AUTO
+            jobStore:
+              class: org.quartz.impl.jdbcjobstore.JobStoreTX
+              driverDelegateClass: org.quartz.impl.jdbcjobstore.StdJDBCDelegate
+              tablePrefix: QRTZ_
+              isClustered: true
+              clusterCheckinInterval: 10000
+              useProperties: false
+            threadPool:
+              class: org.quartz.simpl.SimpleThreadPool
+              threadCount: 10
+              threadPriority: 5
+              threadsInheritContextClassLoaderOfInitializingThread: true
+#    jdbc:第一次 写always
+#      initialize-schema: never
+
