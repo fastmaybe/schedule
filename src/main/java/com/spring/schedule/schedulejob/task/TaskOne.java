@@ -6,6 +6,8 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.UUID;
 
 /**
@@ -45,4 +47,11 @@ public class TaskOne {
         System.out.println(uuid+"[结束]"+System.currentTimeMillis()/1000);
         System.out.println();
     }
+
+        public void runThree(String params){
+            String[] split = params.split(",");
+            System.out.println(Arrays.toString(split));
+            System.out.println(System.currentTimeMillis()/1000);
+            System.out.println();
+        }
 }
