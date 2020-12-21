@@ -22,8 +22,10 @@ import java.util.Optional;
 public class DYScheduledTask implements ScheduledOfTask {
 
     private ScheduleJob job;
+    private IJobDetail jobDetail;
 
-    public DYScheduledTask(ScheduleJob job) {
+    public DYScheduledTask(ScheduleJob job,IJobDetail jobDetail) {
+        this.jobDetail = jobDetail;
         this.job = job;
     }
 
@@ -49,8 +51,9 @@ public class DYScheduledTask implements ScheduledOfTask {
                 method.invoke(Modifier.isStatic(method.getModifiers()) ? null : bean, params);
             }
 
+            jobDetail.onComplete(job);
         } catch (Exception e) {
-            //todo 出现异常最好 将其标记为异常状态 或者 通知 因为下次还是会继续执行
+            jobDetail.onError(job,e);
             e.printStackTrace();
         }
 

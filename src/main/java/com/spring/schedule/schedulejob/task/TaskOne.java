@@ -34,16 +34,12 @@ public class TaskOne {
     }
 
 
-    @Async
+
     public void runTwo(){
         String uuid = UUID.randomUUID().toString();
         System.out.println(uuid+"[开始]"+System.currentTimeMillis()/1000);
         System.out.println(Thread.currentThread().getName());
-        try {
-            Thread.sleep(15000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
         System.out.println(uuid+"[结束]"+System.currentTimeMillis()/1000);
         System.out.println();
     }
